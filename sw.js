@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yova-flash-v6';
+const CACHE_NAME = 'yova-flash-v7';
 const ASSETS = [
   './',
   './index.html',

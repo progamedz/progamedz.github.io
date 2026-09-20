@@ -52,6 +52,34 @@ if (SHOW_LOG && document.body) document.body.className = "log";
 function finishUI(ok) {
   if (SHOW_LOG || !document.body) return;
   document.body.className = ok ? "done" : "fail";
+  if (ok) {
+    function goHome() {
+      location.replace("index.html");
+    }
+    window.addEventListener("click", function(e) {
+      if (e.target && (e.target.id === "homeBtn" || e.target.closest("#homeBtn"))) return;
+      goHome();
+    });
+    window.addEventListener("keydown", goHome);
+    function pollDoneGamepad() {
+      var gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+      for (var i = 0; i < gamepads.length; i++) {
+        var gp = gamepads[i];
+        if (gp && gp.buttons) {
+          for (var b = 0; b < gp.buttons.length; b++) {
+            if (gp.buttons[b] && (gp.buttons[b].pressed || gp.buttons[b].value > 0.5)) {
+              goHome();
+              return;
+            }
+          }
+        }
+      }
+      if (document.body.classList.contains("done")) {
+        requestAnimationFrame(pollDoneGamepad);
+      }
+    }
+    if (navigator.getGamepads) requestAnimationFrame(pollDoneGamepad);
+  }
 }
 function mark(tag, detail) {
   const raw = detail;

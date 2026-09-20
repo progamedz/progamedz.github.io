@@ -219,9 +219,76 @@ html, body {
   display: none;
 }
 
+#done-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 32px 40px;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 30px var(--accent-glow);
+  min-width: 320px;
+  max-width: 90vw;
+  animation: fadeInPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes fadeInPop {
+  0% { opacity: 0; transform: translate(-50%, -46%) scale(0.95); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+#done-box .done-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-shadow: 0 0 16px var(--accent-glow);
+}
+
+#done-box .done-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--accent-color);
+  color: #000000;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 12px 28px;
+  border-radius: 30px;
+  box-shadow: 0 4px 18px var(--accent-glow);
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.home-btn:hover, .home-btn:focus {
+  background: #ff9426;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 24px var(--accent-glow);
+  color: #000000;
+}
+
 body.done #spin,
 body.fail #spin {
   display: none;
+}
+
+body.done #done-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 body.fail #msg {
