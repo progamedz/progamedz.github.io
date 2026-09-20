@@ -16,14 +16,10 @@
 <h1 class="main-title">PS4 [5.05] 7.00 - 13.00 FW GoldHEN Host</h1>
 <div class="sub-title">YOVA FLASH Multi-Firmware Host</div>
 
-<div class="card-wrap">
-  <h1 id="msgs">Detecting Firmware...</h1>
-</div>
-
 <div style="text-align:center; margin: 25px auto 40px;">
-  <div style="font-size: 18px; color: var(--status-warn); font-weight: 800; margin-bottom: 14px; letter-spacing: 0.05em; text-transform: uppercase;">
+  <h1 id="msgs" style="font-size: 18px; color: var(--status-warn); font-weight: 800; margin-bottom: 16px; letter-spacing: 0.05em; text-transform: uppercase; min-height: 26px;">
     Select Your Firmware
-  </div>
+  </h1>
   <div class="btn-menu">
     <button type="button" class="btn btn-multi" onclick="autoLaunch()" onmouseover="setMsg('PS4 GoldHEN Auto-Exploit for 5.05 and 7.00 to 13.00 FW')" onmouseout="resetMsg()">GoldHEN Auto Exploit</button>
     <button type="button" class="btn" onclick="launchPayload(505)" onmouseover="setMsg('PS4 5.05 / 5.07 FW GoldHEN Host')" onmouseout="resetMsg()">5.05 / 5.07 FW</button>
@@ -57,9 +53,9 @@ function resetMsg() {
     var m = document.getElementById("msgs");
     if (!m) return;
     if (isPS4) {
-        m.innerHTML = "PS4 Firmware <b>" + fwVersion + "</b> Detected · Select an option below";
+        m.innerHTML = "PS4 Firmware <b>" + fwVersion + "</b> Detected &middot; Select Your Firmware";
     } else {
-        m.innerHTML = "Select Your Firmware Below";
+        m.innerHTML = "Select Your Firmware";
     }
 }
 
