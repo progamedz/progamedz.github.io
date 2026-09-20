@@ -52,38 +52,6 @@ if (SHOW_LOG && document.body) document.body.className = "log";
 function finishUI(ok) {
   if (SHOW_LOG || !document.body) return;
   document.body.className = ok ? "done" : "fail";
-  function goHome() {
-    location.replace("index.html");
-  }
-  if (!ok) {
-    var t = document.querySelector(".done-title");
-    var d = document.querySelector(".done-desc");
-    if (t) t.textContent = "⚡ Payload Dispatched";
-    if (d) d.textContent = "Press PS button or return Home.";
-  }
-  window.addEventListener("click", function(e) {
-    if (e.target && (e.target.id === "homeBtn" || e.target.closest("#homeBtn"))) return;
-    goHome();
-  });
-  window.addEventListener("keydown", goHome);
-  function pollDoneGamepad() {
-    var gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
-    for (var i = 0; i < gamepads.length; i++) {
-      var gp = gamepads[i];
-      if (gp && gp.buttons) {
-        for (var b = 0; b < gp.buttons.length; b++) {
-          if (gp.buttons[b] && (gp.buttons[b].pressed || gp.buttons[b].value > 0.5)) {
-            goHome();
-            return;
-          }
-        }
-      }
-    }
-    if (document.body.classList.contains("done") || document.body.classList.contains("fail")) {
-      requestAnimationFrame(pollDoneGamepad);
-    }
-  }
-  if (navigator.getGamepads) requestAnimationFrame(pollDoneGamepad);
 }
 function mark(tag, detail) {
   const raw = detail;
@@ -220,7 +188,7 @@ let allDone = false,
 
     const KPATCH_FILE =
       "patches/" + (off.kpatch || fwKey.replace(".", "") + ".bin");
-    const PAYLOAD_FILE = params.get("payload") || off.payload || "goldhen.bin";
+    const PAYLOAD_FILE = off.payload || "payload.bin";
     const needPatch = ["k_sysent_661", "k_jmp_rsi"].filter(
       (k) => off[k] === undefined,
     );
