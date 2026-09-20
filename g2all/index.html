@@ -4,7 +4,171 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>YOVA FLASH - PS4 [5.05] 7.00 - 13.00 FW GoldHEN Host</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=orange">
+<style>
+:root {
+  --bg-main: #0a0b0e;
+  --bg-header: #12141a;
+  --bg-card: rgba(18, 20, 26, 0.92);
+  --border-color: rgba(255, 122, 0, 0.35);
+  --accent-color: #ff7a00;
+  --accent-glow: rgba(255, 122, 0, 0.45);
+  --text-white: #ffffff;
+  --text-muted: #d1d5db;
+  --text-dim: #9ca3af;
+  --status-ok: #ff9426;
+  --status-warn: #ffb84d;
+  --status-bad: #ff4d4d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--bg-main) !important;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(255, 122, 0, 0.12) 0%, transparent 55%),
+    radial-gradient(circle at 10% 90%, rgba(255, 122, 0, 0.06) 0%, transparent 45%) !important;
+  color: var(--text-white);
+  font: 15px/1.45 "Segoe UI", system-ui, -apple-system, sans-serif;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+#brand {
+  text-align: center;
+  padding: 12px 16px;
+  background: var(--bg-header);
+  border-bottom: 2px solid var(--accent-color) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+#brand img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color) !important;
+  box-shadow: 0 0 10px var(--accent-glow) !important;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+#brand b {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.main-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-white);
+  margin: 20px 10px 8px;
+  letter-spacing: 0.03em;
+}
+
+.sub-title {
+  font-size: 14px;
+  color: var(--accent-color) !important;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+#msgs {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--status-warn) !important;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  min-height: 26px;
+}
+
+.btn-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 760px;
+  margin: 10px auto 30px;
+}
+
+.btn {
+  background: #12141c;
+  color: #ffffff;
+  width: 227px;
+  height: 48px;
+  font-size: 18px;
+  font-weight: 700;
+  border: 1.5px solid rgba(255, 122, 0, 0.4) !important;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: inherit;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn:hover, .btn:focus {
+  background: #ff7a00 !important;
+  color: #000000 !important;
+  border-color: #ff9426 !important;
+  box-shadow: 0 0 20px var(--accent-glow) !important;
+  transform: translateY(-2px);
+}
+
+.btn.btn-multi {
+  background: #ff7a00 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #ff9426 !important;
+  box-shadow: 0 0 16px var(--accent-glow) !important;
+  font-weight: 800;
+}
+
+.btn.btn-multi:hover, .btn.btn-multi:focus {
+  background: #ffa033 !important;
+  color: #000000 !important;
+  box-shadow: 0 0 24px var(--accent-glow) !important;
+  transform: translateY(-2px);
+}
+
+/* BLUE BUTTON: ⚡ 13.02 - 13.52 Host */
+.btn.btn-host {
+  background: linear-gradient(135deg, #0066ff 0%, #00c8ff 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #00e5ff !important;
+  box-shadow: 0 0 20px rgba(0, 170, 255, 0.7) !important;
+  font-weight: 800;
+}
+
+.btn.btn-host:hover, .btn.btn-host:focus {
+  background: linear-gradient(135deg, #0088ff 0%, #33e0ff 100%) !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 28px rgba(0, 220, 255, 0.95) !important;
+  transform: translateY(-2px);
+}
+</style>
 </head>
 <body>
 <div id="brand">
