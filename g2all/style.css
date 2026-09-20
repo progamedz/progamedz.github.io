@@ -1,0 +1,121 @@
+:root {
+  --bg-main: #0a0b0e;
+  --bg-header: #12141a;
+  --bg-card: rgba(18, 20, 26, 0.92);
+  --border-color: rgba(255, 122, 0, 0.35);
+  --accent-color: #ff7a00;
+  --accent-glow: rgba(255, 122, 0, 0.45);
+  --text-white: #ffffff;
+  --text-muted: #d1d5db;
+  --text-dim: #9ca3af;
+  --status-ok: #ff9426;
+  --status-warn: #ffb84d;
+  --status-bad: #ff4d4d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--bg-main);
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(255, 122, 0, 0.12) 0%, transparent 55%),
+    radial-gradient(circle at 10% 90%, rgba(255, 122, 0, 0.06) 0%, transparent 45%);
+  color: var(--text-white);
+  font: 15px/1.45 "Segoe UI", system-ui, -apple-system, sans-serif;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+#brand {
+  text-align: center;
+  padding: 12px 16px;
+  background: var(--bg-header);
+  border-bottom: 2px solid var(--accent-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+#brand img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-glow);
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+#brand b {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.main-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-white);
+  margin: 20px 10px 10px;
+  letter-spacing: 0.03em;
+}
+
+.sub-title {
+  font-size: 14px;
+  color: var(--accent-color);
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+.card-wrap {
+  max-width: 620px;
+  margin: 30px auto;
+  padding: 32px 36px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 122, 0, 0.12);
+}
+
+#msgs {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1.5;
+  margin: 15px 0;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-credits {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 40px;
+}
+
+.footer-credits a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 700;
+  margin: 0 6px;
+}
+
+.footer-credits a:hover {
+  text-decoration: underline;
+}

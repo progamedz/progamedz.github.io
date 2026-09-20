@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html manifest="900.manifest">
+<head>
+<title>YOVA FLASH - PS4 [5.05] 7.00 - 13.00 FW GoldHEN Host</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>
+history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
+function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));window.msgs.innerHTML="Installing Offline Cache: " + Percent + "%";}
+function DisplayCacheProgress(){window.msgs.innerHTML="Cache Installed Successfully ✔";setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},1500);}
+window.applicationCache.addEventListener("progress",DLProgress,false);
+window.applicationCache.oncached=function(e){DisplayCacheProgress();};
+window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
+window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Installing Cache! - Clear and Re-Open Your Browser ...";};
+</script>
+<div id="brand">
+  <img src="logo_raw.png" alt="Logo" width="34" height="34">
+  <b>YOVA FLASH</b>
+  <img src="flag.png" alt="Algeria Flag" width="34" height="34">
+</div>
+<h1 class="main-title">PS4 [5.05] 7.00 - 13.00 FW GoldHEN Host</h1>
+<div class="sub-title">YOVA FLASH Multi-Firmware Host</div>
+<div class="card-wrap">
+  <h1 id="msgs">Starting Cache Installation...</h1>
+</div>
+<div class="footer-credits">
+  Special Thanks to: <a href="https://twitter.com/_AlAzif">@_AlAzif</a> &middot; ChendoChap &middot; <a href="https://x.com/Kameleonre_">@Kameleonre_</a> &middot; SiSTR0 &middot; Abc
+</div>
+</body>
+</html>
