@@ -119,3 +119,54 @@ html, body {
 .footer-credits a:hover {
   text-decoration: underline;
 }
+
+.btn-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 760px;
+  margin: 10px auto 30px;
+}
+
+.btn {
+  background: #12141c;
+  color: #ffffff;
+  width: 227px;
+  height: 48px;
+  font-size: 18px;
+  font-weight: 700;
+  border: 1.5px solid rgba(255, 122, 0, 0.4);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: inherit;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn:hover, .btn:focus {
+  background: #ff7a00;
+  color: #000000;
+  border-color: #ff9426;
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+.btn.btn-multi {
+  background: #ff7a00;
+  color: #ffffff;
+  border: 1.5px solid #ff9426;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.btn.btn-multi:hover, .btn.btn-multi:focus {
+  background: #ffa033;
+  color: #000000;
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+
