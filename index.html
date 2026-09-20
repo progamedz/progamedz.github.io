@@ -6,18 +6,17 @@
 <title>YOVA FLASH</title>
 <style>
   :root {
-    --bg-main: #0a0b0e;
-    --bg-header: #12141a;
-    --bg-card: rgba(18, 20, 26, 0.92);
-    --border-color: rgba(255, 122, 0, 0.35);
+    --bg-main: #0b0d10;
+    --bg-header: #07080a;
+    --border-color: #161a20;
     --accent-color: #ff7a00;
-    --accent-glow: rgba(255, 122, 0, 0.45);
-    --text-white: #ffffff;
-    --text-muted: #d1d5db;
-    --text-dim: #9ca3af;
-    --status-ok: #ff9426;
+    --accent-glow: rgba(255, 122, 0, 0.35);
+    --text-primary: #e8ecf2;
+    --text-muted: #6a7380;
+    --text-dim: #505864;
+    --status-ok: #22c55e;
     --status-warn: #ffb84d;
-    --status-bad: #ff4d4d;
+    --status-bad: #ef4444;
   }
 
   * { box-sizing: border-box; }
@@ -25,13 +24,10 @@
   html, body {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
     background: var(--bg-main);
-    background-image:
-      radial-gradient(circle at 50% 0%, rgba(255, 122, 0, 0.12) 0%, transparent 55%),
-      radial-gradient(circle at 10% 90%, rgba(255, 122, 0, 0.06) 0%, transparent 45%);
-    color: var(--text-white);
+    color: #c8ced8;
     font: 15px/1.45 "Segoe UI", system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -40,7 +36,7 @@
     padding: 12px 16px;
     background: var(--bg-header);
     border-bottom: 2px solid var(--accent-color);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 12px var(--accent-glow);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,11 +44,10 @@
   }
 
   #brand img {
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    border: 2px solid var(--accent-color);
-    box-shadow: 0 0 10px var(--accent-glow);
+    border: 1.5px solid var(--accent-color);
     object-fit: cover;
     vertical-align: middle;
   }
@@ -60,191 +55,88 @@
   #brand b {
     font-size: 16px;
     font-weight: 800;
-    letter-spacing: 0.15em;
-    color: var(--text-white);
+    letter-spacing: 0.12em;
+    color: var(--text-primary);
     text-transform: uppercase;
     vertical-align: middle;
   }
 
-  .main-title {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--text-white);
-    margin: 24px 10px 8px;
-    letter-spacing: 0.03em;
-    text-align: center;
-  }
-
-  .sub-title {
-    font-size: 14px;
-    color: var(--accent-color);
-    font-weight: 700;
-    margin-bottom: 16px;
-    letter-spacing: 0.05em;
-    text-align: center;
-  }
-
   #wrap {
-    max-width: 760px;
-    margin: 10px auto 20px;
+    max-width: 640px;
+    margin: 40px auto 20px;
+    padding: 0 20px;
     text-align: center;
   }
 
   #state {
-    font-size: 18px;
-    font-weight: 800;
-    margin: 0 0 8px;
-    color: var(--status-warn);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+    letter-spacing: 0.03em;
   }
 
   #det {
     font-size: 14px;
     color: var(--text-muted);
-    margin: 0 0 6px;
+    margin-bottom: 18px;
   }
 
   #det b {
-    color: var(--text-white);
-    font-weight: 700;
+    color: #9aa3b0;
   }
 
   #cache {
     font-size: 13px;
     color: var(--text-dim);
-    margin: 0 0 4px;
-    min-height: 16px;
+    min-height: 1.45em;
   }
 
-  #cache.cacheok {
-    color: var(--status-ok);
-    font-weight: 700;
-  }
+  .cacheok { color: var(--status-ok) !important; font-weight: 600; }
+  .warn { color: var(--status-warn) !important; font-weight: 600; }
+  .bad { color: var(--status-bad) !important; font-weight: 600; }
 
-  .ok { color: var(--status-ok); font-weight: 700; }
-  .bad { color: var(--status-bad); font-weight: 700; }
-  .warn { color: var(--status-warn); font-weight: 700; }
-
-  .btn-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 14px;
-    max-width: 780px;
-    margin: 0 auto;
-  }
-
-  .btn {
-    background: #12141c;
-    color: #ffffff;
-    width: 236px;
-    height: 50px;
-    font-size: 18px;
-    font-weight: 700;
-    border: 1.5px solid rgba(255, 122, 0, 0.4);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.25s ease;
+  .btn-multi {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
+    background: rgba(255, 122, 0, 0.1);
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 122, 0, 0.5);
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: 700;
     text-decoration: none;
-    font-family: inherit;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    margin-top: 25px;
   }
 
-  .btn:hover, .btn:focus {
-    background: #ff7a00;
+  .btn-multi:hover, .btn-multi:focus {
+    background: var(--accent-color);
     color: #000000;
     border-color: #ff9426;
     box-shadow: 0 0 20px var(--accent-glow);
-    transform: translateY(-2px);
-  }
-
-  .btn-host {
-    background: linear-gradient(135deg, #ff7a00 0%, #e65c00 100%);
-    color: #ffffff;
-    border: 1.5px solid #ffa033;
-    box-shadow: 0 0 20px rgba(255, 122, 0, 0.5);
-    font-weight: 800;
-  }
-
-  .btn-host:hover, .btn-host:focus {
-    background: linear-gradient(135deg, #ffa033 0%, #ff7a00 100%);
-    color: #000000;
-    border-color: #ffffff;
-    box-shadow: 0 0 28px rgba(255, 122, 0, 0.8);
-    transform: translateY(-2px);
-  }
-
-  .btn-gold {
-    background: #161510;
-    color: #ffd700;
-    border: 1.5px solid #ffc107;
-    box-shadow: 0 0 14px rgba(255, 193, 7, 0.2);
-  }
-
-  .btn-gold:hover, .btn-gold:focus {
-    background: #ffc107;
-    color: #000000;
-    border-color: #ffe066;
-    box-shadow: 0 0 24px rgba(255, 193, 7, 0.6);
-    transform: translateY(-2px);
-  }
-
-  .btn-hen {
-    background: #10141d;
-    color: #ffffff;
-    border: 1.5px solid rgba(255, 122, 0, 0.6);
-    box-shadow: 0 0 14px rgba(255, 122, 0, 0.15);
-  }
-
-  .btn-hen:hover, .btn-hen:focus {
-    background: #ff8c1a;
-    color: #000000;
-    border-color: #ffa64d;
-    box-shadow: 0 0 22px var(--accent-glow);
-    transform: translateY(-2px);
-  }
-
-  .btn-nav {
-    background: #0d0f16;
-    color: #d8e2ed;
-    border: 1.5px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  }
-
-  .btn-nav:hover, .btn-nav:focus {
-    background: #ffffff;
-    color: #000000;
-    border-color: #ffffff;
-    box-shadow: 0 0 22px rgba(255, 255, 255, 0.4);
     transform: translateY(-2px);
   }
 </style>
 </head>
 <body>
 <div id="brand">
-  <img src="logo_raw.png" alt="Logo" width="34" height="34">
+  <img src="logo_raw.png" alt="Logo" width="30" height="30">
   <b>YOVA FLASH</b>
-  <img src="flag.png" alt="Algeria Flag" width="34" height="34">
+  <img src="flag.png" alt="Algeria Flag" width="30" height="30">
 </div>
-
-<h1 class="main-title">PS4 13.02 - 13.52 FW Exploit Host</h1>
-<div class="sub-title">YOVA FLASH WebKit &amp; Kernel Exploit</div>
 
 <div id="wrap">
-  <div id="state">Detecting Firmware...</div>
+  <div id="state">detecting firmware...</div>
   <div id="det"></div>
   <div id="cache"></div>
-</div>
 
-<div style="text-align:center; margin: 15px auto 40px;">
-  <div class="btn-menu">
-    <button type="button" class="btn btn-host" onclick="go()" onmouseover="setState('PS4 13.02 - 13.52 Host (Auto Exploit &amp; Payload)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">⚡ 13.02 - 13.52 Host</button>
-    <a href="g2all/index.html" class="btn btn-nav" onmouseover="setState('Switch to Multi-Firmware Host (5.05 - 13.00 FW)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">👑 5.05 - 13.00 FW</a>
+  <div style="margin-top: 30px;">
+    <a href="g2all/index.html" class="btn-multi">👑 5.05 - 13.00 Multi-Firmware Host</a>
   </div>
 </div>
 
@@ -253,9 +145,8 @@
     var stateEl = document.getElementById("state");
     var detEl = document.getElementById("det");
     var cacheEl = document.getElementById("cache");
-    function setState(t, c) { stateEl.innerHTML = t; stateEl.className = c || ""; }
+    function setState(t, c) { stateEl.textContent = t; stateEl.className = c || ""; }
     function setCache(t, ok) { cacheEl.textContent = t; cacheEl.className = ok ? "cacheok" : ""; }
-    window.setState = setState;
     var params = new URLSearchParams(location.search);
 
     // Firmwares this build has a MEASURED kernel table for. jb.js still runs its
@@ -282,7 +173,6 @@
 
     var target = "jb.html" + location.search;
     function go() { setState("loading jailbreak...", "warn"); location.replace(target); }
-    window.go = go;
 
     function waitForTap(msg, action) {
         setState(msg, "warn");
@@ -295,23 +185,27 @@
         window.addEventListener("keydown", fire);
     }
 
+    // Off-target consoles are not launched automatically -- one tap still runs
+    // it, so a user-agent quirk on the real 13.52 console can never lock it out.
     if (!supported) {
-        setState("Select an option below", "warn");
-    } else {
-        setState("Ready &middot; Select your option below", "ok");
+        setState("UNSUPPORTED FIRMWARE", "bad");
+        waitForTap("UNSUPPORTED (" + (key || "unknown") + ") -- press X or tap to run anyway", go);
+        return;
     }
 
     var ac = window.applicationCache;
     if (!ac || !document.documentElement.hasAttribute("manifest")) {
-        // No cache manifest active
+        go();
     } else if (!navigator.onLine) {
         setCache("offline -- from cache", true);
+        go();
     } else if (ac.status === ac.IDLE) {
         setCache("cached", true);
+        go();
     } else if (ac.status === ac.UPDATEREADY) {
         try { ac.swapCache(); } catch (e) {}
         setCache("update downloaded", true);
-        waitForTap("UPDATE READY -- press X or tap to reload",
+        waitForTap("UPDATE READY -- press X or tap to reload & run",
                    function () { location.reload(); });
     } else {
         setCache("checking cache...");
@@ -323,22 +217,25 @@
         }, false);
         ac.addEventListener("cached", function () {
             setCache("cached for offline use", true);
-            setState("Ready &middot; Select your option below", "ok");
+            waitForTap("CACHED (first run) -- press X or tap to run", go);
         }, false);
         ac.addEventListener("updateready", function () {
             try { ac.swapCache(); } catch (e) {}
             setCache("update downloaded", true);
-            waitForTap("UPDATE READY -- press X or tap to reload",
+            waitForTap("UPDATE READY -- press X or tap to reload & run",
                        function () { location.reload(); });
         }, false);
         ac.addEventListener("noupdate", function () {
             setCache("cached -- offline ready", true);
+            go();
         }, false);
         ac.addEventListener("error", function () {
             setCache("cache unavailable");
+            waitForTap("CACHE FAILED -- press X or tap to run anyway", go);
         }, false);
         ac.addEventListener("obsolete", function () {
             setCache("cache obsolete");
+            waitForTap("CACHE OBSOLETE -- press X or tap to run", go);
         }, false);
     }
 })();
