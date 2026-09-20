@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# rev 20260920-080800-full-patches
+# rev 20260920-090000-goldhen-demo
 
 CACHE:
 index.html
@@ -16,6 +16,7 @@ int64.js
 ps4_offsets.js
 rpc_worker.js
 payload2.bin
+goldhen.bin
 patches/1302.bin
 patches/1350.bin
 patches/1352.bin
