@@ -66,37 +66,43 @@
     vertical-align: middle;
   }
 
-  #wrap {
-    max-width: 580px;
-    margin: 60px auto;
-    padding: 32px 36px;
-    background: var(--bg-card);
-    border: 1.5px solid var(--border-color);
-    border-radius: 16px;
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 122, 0, 0.12);
+  .main-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-white);
+    margin: 24px 10px 8px;
+    letter-spacing: 0.03em;
     text-align: center;
-    cursor: pointer;
-    transition: all 0.25s ease;
   }
 
-  #wrap:hover {
-    border-color: var(--accent-color);
-    box-shadow: 0 14px 40px rgba(255, 122, 0, 0.25);
-    transform: translateY(-2px);
+  .sub-title {
+    font-size: 14px;
+    color: var(--accent-color);
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  #wrap {
+    max-width: 760px;
+    margin: 10px auto 20px;
+    text-align: center;
   }
 
   #state {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 800;
-    margin: 0 0 10px;
-    color: var(--text-white);
-    letter-spacing: 0.02em;
+    margin: 0 0 8px;
+    color: var(--status-warn);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   #det {
     font-size: 14px;
     color: var(--text-muted);
-    margin: 0 0 8px;
+    margin: 0 0 6px;
   }
 
   #det b {
@@ -125,20 +131,20 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 12px;
-    max-width: 760px;
+    gap: 14px;
+    max-width: 780px;
     margin: 0 auto;
   }
 
   .btn {
     background: #12141c;
     color: #ffffff;
-    width: 227px;
-    height: 48px;
+    width: 236px;
+    height: 50px;
     font-size: 18px;
     font-weight: 700;
     border: 1.5px solid rgba(255, 122, 0, 0.4);
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.25s ease;
     display: inline-flex;
@@ -157,17 +163,65 @@
     transform: translateY(-2px);
   }
 
-  .btn.btn-multi {
-    background: #ff7a00;
+  .btn-host {
+    background: linear-gradient(135deg, #ff7a00 0%, #e65c00 100%);
     color: #ffffff;
-    border: 1.5px solid #ff9426;
-    box-shadow: 0 0 16px var(--accent-glow);
+    border: 1.5px solid #ffa033;
+    box-shadow: 0 0 20px rgba(255, 122, 0, 0.5);
+    font-weight: 800;
   }
 
-  .btn.btn-multi:hover, .btn.btn-multi:focus {
-    background: #ffa033;
+  .btn-host:hover, .btn-host:focus {
+    background: linear-gradient(135deg, #ffa033 0%, #ff7a00 100%);
     color: #000000;
-    box-shadow: 0 0 24px var(--accent-glow);
+    border-color: #ffffff;
+    box-shadow: 0 0 28px rgba(255, 122, 0, 0.8);
+    transform: translateY(-2px);
+  }
+
+  .btn-gold {
+    background: #161510;
+    color: #ffd700;
+    border: 1.5px solid #ffc107;
+    box-shadow: 0 0 14px rgba(255, 193, 7, 0.2);
+  }
+
+  .btn-gold:hover, .btn-gold:focus {
+    background: #ffc107;
+    color: #000000;
+    border-color: #ffe066;
+    box-shadow: 0 0 24px rgba(255, 193, 7, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .btn-hen {
+    background: #10141d;
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 122, 0, 0.6);
+    box-shadow: 0 0 14px rgba(255, 122, 0, 0.15);
+  }
+
+  .btn-hen:hover, .btn-hen:focus {
+    background: #ff8c1a;
+    color: #000000;
+    border-color: #ffa64d;
+    box-shadow: 0 0 22px var(--accent-glow);
+    transform: translateY(-2px);
+  }
+
+  .btn-nav {
+    background: #0d0f16;
+    color: #d8e2ed;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .btn-nav:hover, .btn-nav:focus {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 0 22px rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
   }
 </style>
 </head>
@@ -177,20 +231,22 @@
   <b>YOVA FLASH</b>
   <img src="flag.png" alt="Algeria Flag" width="34" height="34">
 </div>
+
+<h1 class="main-title">PS4 13.02 - 13.52 FW Exploit Host</h1>
+<div class="sub-title">YOVA FLASH WebKit &amp; Kernel Exploit</div>
+
 <div id="wrap">
-  <div id="state">detecting firmware...</div>
+  <div id="state">Detecting Firmware...</div>
   <div id="det"></div>
   <div id="cache"></div>
 </div>
-<div style="text-align:center; margin: 25px auto 40px;">
-  <div style="font-size: 18px; color: var(--status-warn); font-weight: 800; margin-bottom: 14px; letter-spacing: 0.05em; text-transform: uppercase;">
-    Select Your Firmware
-  </div>
+
+<div style="text-align:center; margin: 15px auto 40px;">
   <div class="btn-menu">
-    <a href="g2all/index.html" class="btn btn-multi" onmouseover="setState('PS4 GoldHEN Host for 5.05 and 7.00 to 13.00 FW', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">GoldHEN Multi FW</a>
-    <button type="button" class="btn" onclick="go()" onmouseover="setState('PS4 13.02 - 13.52 Host (Auto Exploit &amp; Payload)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">13.02 - 13.52 Host</button>
-    <button type="button" class="btn" onclick="location.replace('jb.html?payload=goldhen.bin')" onmouseover="setState('PS4 13.52 FW GoldHEN Host', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">13.52 GoldHEN</button>
-    <button type="button" class="btn" onclick="location.replace('jb.html?payload=payload2.bin')" onmouseover="setState('PS4 13.02 - 13.52 FW HEN Host', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">13.02 - 13.52 HEN</button>
+    <button type="button" class="btn btn-host" onclick="go()" onmouseover="setState('PS4 13.02 - 13.52 Host (Auto Exploit &amp; Payload)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">⚡ 13.02 - 13.52 Host</button>
+    <button type="button" class="btn btn-gold" onclick="location.replace('jb.html?payload=goldhen.bin')" onmouseover="setState('PS4 13.52 FW GoldHEN Host', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">👑 13.52 GoldHEN</button>
+    <button type="button" class="btn btn-hen" onclick="location.replace('jb.html?payload=payload2.bin')" onmouseover="setState('PS4 13.02 - 13.52 FW HEN Host', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">🛡️ 13.02 - 13.52 HEN</button>
+    <a href="g2all/index.html" class="btn btn-nav" onmouseover="setState('Switch to Multi-Firmware Host (5.05 - 13.00 FW)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">🌐 GoldHEN Multi FW</a>
   </div>
 </div>
 

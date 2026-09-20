@@ -170,3 +170,20 @@ html, body {
   box-shadow: 0 0 24px var(--accent-glow);
 }
 
+.btn.btn-host {
+  background: linear-gradient(135deg, #ff7a00 0%, #e65c00 100%);
+  color: #ffffff;
+  border: 1.5px solid #ffa033;
+  box-shadow: 0 0 20px rgba(255, 122, 0, 0.5);
+  font-weight: 800;
+}
+
+.btn.btn-host:hover, .btn.btn-host:focus {
+  background: linear-gradient(135deg, #ffa033 0%, #ff7a00 100%);
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 0 28px rgba(255, 122, 0, 0.8);
+  transform: translateY(-2px);
+}
+
+
