@@ -26,11 +26,11 @@
   <div class="btn-group" id="btnGroup">
     <button type="button" class="action-btn gold-btn" id="btnGold">
       <span>⚡ Launch GoldHEN</span>
-      <span class="sub">v2.4b18.11 &middot; Press (□ / △)</span>
+      <span class="sub">v2.4b18.11 (13.52) &middot; Press (□ / △)</span>
     </button>
     <button type="button" class="action-btn" id="btnHen">
       <span>🚀 Launch PS4-HEN</span>
-      <span class="sub">Standard &middot; Press (X)</span>
+      <span class="sub">Proven Stable (13.02 &middot; 13.04 &middot; 13.50) &middot; Press (X)</span>
     </button>
   </div>
 </div>
@@ -109,15 +109,18 @@
             launchGoldHen();
             return;
         }
+        var is1352 = (fwnum === 1352);
+        var targetName = is1352 ? "GoldHEN" : "PS4-HEN";
         var count = seconds;
-        setState("Auto-launching GoldHEN in " + count + "s...", "ok");
+        setState("Auto-launching " + targetName + " in " + count + "s...", "ok");
         timer = setInterval(function () {
             count--;
             if (count <= 0) {
                 cancelTimer();
-                launchGoldHen();
+                if (is1352) launchGoldHen();
+                else launchHen();
             } else {
-                setState("Auto-launching GoldHEN in " + count + "s...", "ok");
+                setState("Auto-launching " + targetName + " in " + count + "s...", "ok");
             }
         }, 1000);
     }
