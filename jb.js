@@ -55,35 +55,35 @@ function finishUI(ok) {
   function goHome() {
     location.replace("index.html");
   }
-  if (ok) {
-    window.addEventListener("click", function(e) {
-      if (e.target && (e.target.id === "homeBtn" || e.target.closest("#homeBtn"))) return;
-      goHome();
-    });
-    window.addEventListener("keydown", goHome);
-  } else {
-    window.addEventListener("click", goHome);
-    window.addEventListener("keydown", goHome);
+  if (!ok) {
+    var t = document.querySelector(".done-title");
+    var d = document.querySelector(".done-desc");
+    if (t) t.textContent = "⚡ Payload Dispatched";
+    if (d) d.textContent = "Press PS button or return Home.";
   }
-    function pollDoneGamepad() {
-      var gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
-      for (var i = 0; i < gamepads.length; i++) {
-        var gp = gamepads[i];
-        if (gp && gp.buttons) {
-          for (var b = 0; b < gp.buttons.length; b++) {
-            if (gp.buttons[b] && (gp.buttons[b].pressed || gp.buttons[b].value > 0.5)) {
-              goHome();
-              return;
-            }
+  window.addEventListener("click", function(e) {
+    if (e.target && (e.target.id === "homeBtn" || e.target.closest("#homeBtn"))) return;
+    goHome();
+  });
+  window.addEventListener("keydown", goHome);
+  function pollDoneGamepad() {
+    var gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+    for (var i = 0; i < gamepads.length; i++) {
+      var gp = gamepads[i];
+      if (gp && gp.buttons) {
+        for (var b = 0; b < gp.buttons.length; b++) {
+          if (gp.buttons[b] && (gp.buttons[b].pressed || gp.buttons[b].value > 0.5)) {
+            goHome();
+            return;
           }
         }
       }
-      if (document.body.classList.contains("done")) {
-        requestAnimationFrame(pollDoneGamepad);
-      }
     }
-    if (navigator.getGamepads) requestAnimationFrame(pollDoneGamepad);
+    if (document.body.classList.contains("done") || document.body.classList.contains("fail")) {
+      requestAnimationFrame(pollDoneGamepad);
+    }
   }
+  if (navigator.getGamepads) requestAnimationFrame(pollDoneGamepad);
 }
 function mark(tag, detail) {
   const raw = detail;
