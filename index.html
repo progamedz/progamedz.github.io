@@ -22,6 +22,17 @@
   <div id="state">detecting firmware...</div>
   <div id="det"></div>
   <div id="cache"></div>
+
+  <div class="btn-group" id="btnGroup">
+    <button type="button" class="action-btn gold-btn" id="btnGold">
+      <span>⚡ Launch GoldHEN</span>
+      <span class="sub">v2.4b18.11 &middot; Press (□ / △)</span>
+    </button>
+    <button type="button" class="action-btn" id="btnHen">
+      <span>🚀 Launch PS4-HEN</span>
+      <span class="sub">Standard &middot; Press (X)</span>
+    </button>
+  </div>
 </div>
 
 <script>
@@ -29,6 +40,9 @@
     var stateEl = document.getElementById("state");
     var detEl = document.getElementById("det");
     var cacheEl = document.getElementById("cache");
+    var btnGold = document.getElementById("btnGold");
+    var btnHen = document.getElementById("btnHen");
+
     function setState(t, c) { stateEl.textContent = t; stateEl.className = c || ""; }
     function setCache(t, ok) { cacheEl.textContent = t; cacheEl.className = ok ? "cacheok" : ""; }
     var params = new URLSearchParams(location.search);
@@ -51,12 +65,66 @@
         + (supported ? " &middot; <b>supported</b>"
                      : " &middot; not in this build's kernel table");
 
-    var target = "jb.html" + location.search;
-    function go() { setState("loading jailbreak...", "warn"); location.replace(target); }
+    var timer = null;
+    function cancelTimer() {
+        if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    function launchGoldHen() {
+        cancelTimer();
+        setState("loading GoldHEN v2.4b18.11...", "warn");
+        var p = new URLSearchParams(location.search);
+        p.set("payload", "goldhen.bin");
+        location.replace("jb.html?" + p.toString());
+    }
+
+    function launchHen() {
+        cancelTimer();
+        setState("loading PS4-HEN (Standard)...", "warn");
+        var p = new URLSearchParams(location.search);
+        p.set("payload", "payload2.bin");
+        location.replace("jb.html?" + p.toString());
+    }
+
+    if (btnGold) {
+        btnGold.addEventListener("click", function (e) {
+            e.stopPropagation();
+            launchGoldHen();
+        });
+    }
+    if (btnHen) {
+        btnHen.addEventListener("click", function (e) {
+            e.stopPropagation();
+            launchHen();
+        });
+    }
+
+    function scheduleAutoLaunch(seconds) {
+        if (params.get("payload") === "payload2.bin") {
+            launchHen();
+            return;
+        } else if (params.get("payload") === "goldhen.bin") {
+            launchGoldHen();
+            return;
+        }
+        var count = seconds;
+        setState("Auto-launching GoldHEN in " + count + "s...", "ok");
+        timer = setInterval(function () {
+            count--;
+            if (count <= 0) {
+                cancelTimer();
+                launchGoldHen();
+            } else {
+                setState("Auto-launching GoldHEN in " + count + "s...", "ok");
+            }
+        }, 1000);
+    }
 
     function waitForTap(msg, action) {
+        cancelTimer();
         setState(msg, "warn");
-        function fire() {
+        function fire(e) {
+            if (e && e.target && e.target.closest && e.target.closest(".action-btn")) return;
             window.removeEventListener("click", fire);
             window.removeEventListener("keydown", fire);
             action();
@@ -65,21 +133,33 @@
         window.addEventListener("keydown", fire);
     }
 
-    // Controller Cross (X) button & Gamepad API listener
-    var lastXState = false;
+    // Controller button listeners (DualShock 4)
+    var lastB0 = false, lastB2 = false, lastB3 = false;
     function pollGamepad() {
         var gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
         for (var i = 0; i < gamepads.length; i++) {
             var gp = gamepads[i];
-            if (gp && gp.buttons && gp.buttons[0]) {
-                var isPressed = gp.buttons[0].pressed || gp.buttons[0].value > 0.5;
-                if (isPressed && !lastXState) {
-                    lastXState = true;
-                    go();
+            if (gp && gp.buttons) {
+                // Cross (X) -> PS4-HEN Standard
+                var b0 = gp.buttons[0] && (gp.buttons[0].pressed || gp.buttons[0].value > 0.5);
+                if (b0 && !lastB0) {
+                    lastB0 = true;
+                    launchHen();
                     return;
-                } else if (!isPressed) {
-                    lastXState = false;
                 }
+                lastB0 = b0;
+
+                // Square (2) or Triangle (3) -> GoldHEN v2.4b18.11
+                var b2 = gp.buttons[2] && (gp.buttons[2].pressed || gp.buttons[2].value > 0.5);
+                var b3 = gp.buttons[3] && (gp.buttons[3].pressed || gp.buttons[3].value > 0.5);
+                if ((b2 && !lastB2) || (b3 && !lastB3)) {
+                    lastB2 = b2;
+                    lastB3 = b3;
+                    launchGoldHen();
+                    return;
+                }
+                lastB2 = b2;
+                lastB3 = b3;
             }
         }
         requestAnimationFrame(pollGamepad);
@@ -88,19 +168,19 @@
 
     if (!supported) {
         setState("UNSUPPORTED FIRMWARE", "bad");
-        waitForTap("UNSUPPORTED (" + (key || "unknown") + ") -- press X or tap to run anyway", go);
+        waitForTap("UNSUPPORTED (" + (key || "unknown") + ") -- press X or tap to run anyway", launchGoldHen);
         return;
     }
 
     var ac = window.applicationCache;
     if (!ac || !document.documentElement.hasAttribute("manifest")) {
-        go();
+        scheduleAutoLaunch(4);
     } else if (!navigator.onLine) {
         setCache("offline -- from cache", true);
-        go();
+        scheduleAutoLaunch(3);
     } else if (ac.status === ac.IDLE) {
         setCache("cached", true);
-        go();
+        scheduleAutoLaunch(4);
     } else if (ac.status === ac.UPDATEREADY) {
         try { ac.swapCache(); } catch (e) {}
         setCache("update downloaded", true);
@@ -116,7 +196,7 @@
         }, false);
         ac.addEventListener("cached", function () {
             setCache("cached for offline use", true);
-            waitForTap("CACHED (first run) -- press X or tap to run", go);
+            scheduleAutoLaunch(4);
         }, false);
         ac.addEventListener("updateready", function () {
             try { ac.swapCache(); } catch (e) {}
@@ -126,15 +206,15 @@
         }, false);
         ac.addEventListener("noupdate", function () {
             setCache("cached -- offline ready", true);
-            go();
+            scheduleAutoLaunch(4);
         }, false);
         ac.addEventListener("error", function () {
             setCache("cache unavailable");
-            waitForTap("CACHE FAILED -- press X or tap to run anyway", go);
+            scheduleAutoLaunch(4);
         }, false);
         ac.addEventListener("obsolete", function () {
             setCache("cache obsolete");
-            waitForTap("CACHE OBSOLETE -- press X or tap to run", go);
+            scheduleAutoLaunch(4);
         }, false);
     }
 })();
