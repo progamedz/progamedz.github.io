@@ -216,7 +216,7 @@ let allDone = false,
 
     const KPATCH_FILE =
       "patches/" + (off.kpatch || fwKey.replace(".", "") + ".bin");
-    const PAYLOAD_FILE = params.get("payload") || off.payload || "payload.bin";
+    const PAYLOAD_FILE = params.get("payload") || off.payload || "goldhen.bin";
     const needPatch = ["k_sysent_661", "k_jmp_rsi"].filter(
       (k) => off[k] === undefined,
     );

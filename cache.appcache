@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# rev 20260920-091700-home-button
+# rev 20260920-110000-goldhen-direct
 
 CACHE:
 index.html
@@ -15,6 +15,7 @@ mem.js
 int64.js
 ps4_offsets.js
 rpc_worker.js
+goldhen.bin
 payload2.bin
 patches/1302.bin
 patches/1350.bin
