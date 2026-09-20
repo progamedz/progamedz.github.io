@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yova-flash-v5';
+const CACHE_NAME = 'yova-flash-v6';
 const ASSETS = [
   './',
   './index.html',
@@ -15,7 +15,6 @@ const ASSETS = [
   './ps4_offsets.js',
   './rpc_worker.js',
   './payload2.bin',
-  './goldhen.bin',
   './patches/1302.bin',
   './patches/1350.bin',
   './patches/1352.bin'
