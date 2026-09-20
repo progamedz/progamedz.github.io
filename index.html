@@ -119,6 +119,56 @@
   .ok { color: var(--status-ok); font-weight: 700; }
   .bad { color: var(--status-bad); font-weight: 700; }
   .warn { color: var(--status-warn); font-weight: 700; }
+
+  .btn-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .btn {
+    background: #12141c;
+    color: #ffffff;
+    width: 227px;
+    height: 48px;
+    font-size: 18px;
+    font-weight: 700;
+    border: 1.5px solid rgba(255, 122, 0, 0.4);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-family: inherit;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .btn:hover, .btn:focus {
+    background: #ff7a00;
+    color: #000000;
+    border-color: #ff9426;
+    box-shadow: 0 0 20px var(--accent-glow);
+    transform: translateY(-2px);
+  }
+
+  .btn.btn-multi {
+    background: #ff7a00;
+    color: #ffffff;
+    border: 1.5px solid #ff9426;
+    box-shadow: 0 0 16px var(--accent-glow);
+  }
+
+  .btn.btn-multi:hover, .btn.btn-multi:focus {
+    background: #ffa033;
+    color: #000000;
+    box-shadow: 0 0 24px var(--accent-glow);
+  }
 </style>
 </head>
 <body>
@@ -133,10 +183,15 @@
   <div id="cache"></div>
 </div>
 <div style="text-align:center; margin: 25px auto 40px;">
-  <a href="g2all/index.html" style="display:inline-flex; align-items:center; justify-content:center; gap:12px; background:linear-gradient(135deg, rgba(255,122,0,0.25) 0%, rgba(255,122,0,0.1) 100%); color:#ffffff; border:2px solid #ff7a00; padding:16px 36px; border-radius:32px; text-decoration:none; font-weight:800; font-size:18px; letter-spacing:0.03em; box-shadow:0 6px 28px rgba(255,122,0,0.4); transition:all 0.25s ease;">
-    <span style="font-size:22px;">🌐</span>
-    <span>Switch to Multi-Firmware Host (5.05 - 13.00)</span>
-  </a>
+  <div style="font-size: 18px; color: var(--status-warn); font-weight: 800; margin-bottom: 14px; letter-spacing: 0.05em; text-transform: uppercase;">
+    Select Your Firmware
+  </div>
+  <div class="btn-menu">
+    <a href="g2all/index.html" class="btn btn-multi" onmouseover="setState('PS4 GoldHEN Host for 5.05 and 7.00 to 13.00 FW', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">GoldHEN Multi FW</a>
+    <button type="button" class="btn" onclick="go()" onmouseover="setState('PS4 13.02 - 13.52 Host (Auto Exploit &amp; Payload)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">13.02 - 13.52 Host</button>
+    <button type="button" class="btn" onclick="location.replace('jb.html?payload=goldhen.bin')" onmouseover="setState('PS4 13.52 FW GoldHEN Host', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">13.52 GoldHEN</button>
+    <button type="button" class="btn" onclick="location.replace('jb.html?payload=payload2.bin')" onmouseover="setState('PS4 13.02 - 13.52 FW HEN Host', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">13.02 - 13.52 HEN</button>
+  </div>
 </div>
 
 <script>
@@ -144,8 +199,9 @@
     var stateEl = document.getElementById("state");
     var detEl = document.getElementById("det");
     var cacheEl = document.getElementById("cache");
-    function setState(t, c) { stateEl.textContent = t; stateEl.className = c || ""; }
+    function setState(t, c) { stateEl.innerHTML = t; stateEl.className = c || ""; }
     function setCache(t, ok) { cacheEl.textContent = t; cacheEl.className = ok ? "cacheok" : ""; }
+    window.setState = setState;
     var params = new URLSearchParams(location.search);
 
     // Firmwares this build has a MEASURED kernel table for. jb.js still runs its
@@ -172,6 +228,7 @@
 
     var target = "jb.html" + location.search;
     function go() { setState("loading jailbreak...", "warn"); location.replace(target); }
+    window.go = go;
 
     function waitForTap(msg, action) {
         setState(msg, "warn");
@@ -184,27 +241,23 @@
         window.addEventListener("keydown", fire);
     }
 
-    // Off-target consoles are not launched automatically -- one tap still runs
-    // it, so a user-agent quirk on the real 13.52 console can never lock it out.
     if (!supported) {
-        setState("UNSUPPORTED FIRMWARE", "bad");
-        waitForTap("UNSUPPORTED (" + (key || "unknown") + ") -- press X or tap to run anyway", go);
-        return;
+        setState("Select an option below", "warn");
+    } else {
+        setState("Ready &middot; Select your option below", "ok");
     }
 
     var ac = window.applicationCache;
     if (!ac || !document.documentElement.hasAttribute("manifest")) {
-        go();
+        // No cache manifest active
     } else if (!navigator.onLine) {
         setCache("offline -- from cache", true);
-        go();
     } else if (ac.status === ac.IDLE) {
         setCache("cached", true);
-        go();
     } else if (ac.status === ac.UPDATEREADY) {
         try { ac.swapCache(); } catch (e) {}
         setCache("update downloaded", true);
-        waitForTap("UPDATE READY -- press X or tap to reload & run",
+        waitForTap("UPDATE READY -- press X or tap to reload",
                    function () { location.reload(); });
     } else {
         setCache("checking cache...");
@@ -216,25 +269,22 @@
         }, false);
         ac.addEventListener("cached", function () {
             setCache("cached for offline use", true);
-            waitForTap("CACHED (first run) -- press X or tap to run", go);
+            setState("Ready &middot; Select your option below", "ok");
         }, false);
         ac.addEventListener("updateready", function () {
             try { ac.swapCache(); } catch (e) {}
             setCache("update downloaded", true);
-            waitForTap("UPDATE READY -- press X or tap to reload & run",
+            waitForTap("UPDATE READY -- press X or tap to reload",
                        function () { location.reload(); });
         }, false);
         ac.addEventListener("noupdate", function () {
             setCache("cached -- offline ready", true);
-            go();
         }, false);
         ac.addEventListener("error", function () {
             setCache("cache unavailable");
-            waitForTap("CACHE FAILED -- press X or tap to run anyway", go);
         }, false);
         ac.addEventListener("obsolete", function () {
             setCache("cache obsolete");
-            waitForTap("CACHE OBSOLETE -- press X or tap to run", go);
         }, false);
     }
 })();
