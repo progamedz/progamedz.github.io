@@ -1,0 +1,215 @@
+:root {
+  --bg-main: #0a0b0d;
+  --bg-header: #121418;
+  --bg-card: rgba(22, 24, 28, 0.85);
+  --border-color: rgba(255, 122, 0, 0.3);
+  --accent-color: #ff7a00;
+  --accent-glow: rgba(255, 122, 0, 0.45);
+  --text-main: #ffffff;
+  --text-muted: #d1d5db;
+  --text-dim: #9ca3af;
+  --status-ok: #ff9426;
+  --status-warn: #ffd000;
+  --status-bad: #ff4d4d;
+  --font-main: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-code: "Consolas", "Fira Code", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--bg-main);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(255, 122, 0, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(255, 122, 0, 0.05) 0%, transparent 45%);
+  color: var(--text-main);
+  font: 15px/1.45 var(--font-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header Brand Bar */
+#brand {
+  text-align: center;
+  padding: 14px 16px;
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+#brand img.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 12px var(--accent-glow);
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+#brand img.brand-flag {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2.5px solid var(--accent-color);
+  box-shadow: 0 0 16px var(--accent-glow);
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+#brand b {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--text-main);
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* Landing / Wrap Container */
+#wrap {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#wrap:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 12px 40px rgba(255, 122, 0, 0.25);
+}
+
+#state {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 12px;
+  color: #ffffff;
+}
+
+#det {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+}
+
+#det b {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+#cache {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: 0 0 6px;
+  min-height: 16px;
+}
+
+#cache.cacheok {
+  color: var(--status-ok);
+  font-weight: 700;
+}
+
+/* Status Text Utility Classes */
+.ok { color: var(--status-ok); }
+.bad { color: var(--status-bad); }
+.warn { color: var(--status-warn); }
+
+/* Execution Spinner & Status for jb.html */
+#spin {
+  position: fixed;
+  top: calc(50% - 30px);
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  margin: -35px 0 0 -35px;
+  border: 5px solid rgba(255, 122, 0, 0.2);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#msg {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  display: none;
+}
+
+body.done #spin,
+body.fail #spin {
+  display: none;
+}
+
+body.fail #msg {
+  display: block;
+}
+
+/* Always hide log terminal box when not in log mode */
+#out {
+  display: none !important;
+}
+
+/* Log Mode (?log=1) */
+body.log #spin,
+body.log #msg {
+  display: none;
+}
+
+body.log #wrap {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 1050px;
+  box-shadow: none;
+  cursor: default;
+}
+
+body.log #state {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 12px;
+}
+
+body.log #out {
+  display: block !important;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font: 13px/1.45 var(--font-code);
+  background: #08090b;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 14px 18px;
+  height: calc(100vh - 160px);
+  overflow-y: auto;
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.8);
+}

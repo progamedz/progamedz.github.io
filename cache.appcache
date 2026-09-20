@@ -1,0 +1,20 @@
+CACHE MANIFEST
+# rev 20260920-074550-flag-and-logo
+
+CACHE:
+index.html
+jb.html
+style.css
+app.js
+logo.jpeg
+logo_raw.png
+flag.png
+jb.js
+core.js
+mem.js
+int64.js
+ps4_offsets.js
+rpc_worker.js
+
+NETWORK:
+*
