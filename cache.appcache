@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# rev 20260920-074550-flag-and-logo
+# rev 20260920-080800-full-patches
 
 CACHE:
 index.html
@@ -15,6 +15,10 @@ mem.js
 int64.js
 ps4_offsets.js
 rpc_worker.js
+payload2.bin
+patches/1302.bin
+patches/1350.bin
+patches/1352.bin
 
 NETWORK:
 *

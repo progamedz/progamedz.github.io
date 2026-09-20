@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yova-flash-v3';
+const CACHE_NAME = 'yova-flash-v4';
 const ASSETS = [
   './',
   './index.html',
@@ -13,7 +13,11 @@ const ASSETS = [
   './mem.js',
   './int64.js',
   './ps4_offsets.js',
-  './rpc_worker.js'
+  './rpc_worker.js',
+  './payload2.bin',
+  './patches/1302.bin',
+  './patches/1350.bin',
+  './patches/1352.bin'
 ];
 
 self.addEventListener('install', (e) => {
