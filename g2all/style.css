@@ -1,17 +1,16 @@
 :root {
-  --bg-main: #060913;
-  --bg-header: #0c1222;
-  --bg-card: rgba(12, 18, 32, 0.92);
-  --border-color: rgba(0, 140, 255, 0.35);
-  --accent-color: #0077ff;
-  --accent-cyan: #00d4ff;
-  --accent-glow: rgba(0, 140, 255, 0.5);
+  --bg-main: #0a0b0e;
+  --bg-header: #12141a;
+  --bg-card: rgba(18, 20, 26, 0.92);
+  --border-color: rgba(255, 122, 0, 0.35);
+  --accent-color: #ff7a00;
+  --accent-glow: rgba(255, 122, 0, 0.45);
   --text-white: #ffffff;
-  --text-muted: #c3d4ee;
-  --text-dim: #8fa5c4;
-  --status-ok: #00d4ff;
-  --status-warn: #33aaff;
-  --status-bad: #ff4d6d;
+  --text-muted: #d1d5db;
+  --text-dim: #9ca3af;
+  --status-ok: #ff9426;
+  --status-warn: #ffb84d;
+  --status-bad: #ff4d4d;
 }
 
 * {
@@ -26,9 +25,8 @@ html, body {
   min-height: 100vh;
   background: var(--bg-main);
   background-image:
-    radial-gradient(circle at 50% 0%, rgba(0, 119, 255, 0.18) 0%, transparent 60%),
-    radial-gradient(circle at 10% 90%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 90% 80%, rgba(0, 70, 220, 0.08) 0%, transparent 50%);
+    radial-gradient(circle at 50% 0%, rgba(255, 122, 0, 0.12) 0%, transparent 55%),
+    radial-gradient(circle at 10% 90%, rgba(255, 122, 0, 0.06) 0%, transparent 45%);
   color: var(--text-white);
   font: 15px/1.45 "Segoe UI", system-ui, -apple-system, sans-serif;
   text-align: center;
@@ -40,7 +38,7 @@ html, body {
   padding: 12px 16px;
   background: var(--bg-header);
   border-bottom: 2px solid var(--accent-color);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 18px var(--accent-glow);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,7 +75,7 @@ html, body {
 
 .sub-title {
   font-size: 14px;
-  color: var(--accent-cyan);
+  color: var(--accent-color);
   font-weight: 700;
   margin-bottom: 20px;
   letter-spacing: 0.05em;
@@ -90,13 +88,13 @@ html, body {
   background: var(--bg-card);
   border: 1.5px solid var(--border-color);
   border-radius: 16px;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 140, 255, 0.15);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 122, 0, 0.12);
 }
 
 #msgs {
   font-size: 20px;
   font-weight: 800;
-  color: var(--accent-cyan);
+  color: var(--status-warn);
   line-height: 1.5;
   margin: 15px 0;
   min-height: 40px;
@@ -112,7 +110,7 @@ html, body {
 }
 
 .footer-credits a {
-  color: var(--accent-cyan);
+  color: var(--accent-color);
   text-decoration: none;
   font-weight: 700;
   margin: 0 6px;
@@ -133,13 +131,13 @@ html, body {
 }
 
 .btn {
-  background: #0c1424;
+  background: #12141c;
   color: #ffffff;
   width: 227px;
   height: 48px;
   font-size: 18px;
   font-weight: 700;
-  border: 1.5px solid rgba(0, 140, 255, 0.45);
+  border: 1.5px solid rgba(255, 122, 0, 0.4);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -152,40 +150,41 @@ html, body {
 }
 
 .btn:hover, .btn:focus {
-  background: #0077ff;
-  color: #ffffff;
-  border-color: #00d4ff;
+  background: #ff7a00;
+  color: #000000;
+  border-color: #ff9426;
   box-shadow: 0 0 20px var(--accent-glow);
   transform: translateY(-2px);
 }
 
 .btn.btn-multi {
-  background: linear-gradient(135deg, #0066ff 0%, #00c8ff 100%);
+  background: #ff7a00;
   color: #ffffff;
-  border: 1.5px solid #00d4ff;
-  box-shadow: 0 0 18px rgba(0, 170, 255, 0.65);
+  border: 1.5px solid #ff9426;
+  box-shadow: 0 0 16px var(--accent-glow);
   font-weight: 800;
 }
 
 .btn.btn-multi:hover, .btn.btn-multi:focus {
-  background: linear-gradient(135deg, #0088ff 0%, #33e0ff 100%);
+  background: #ffa033;
   color: #000000;
-  box-shadow: 0 0 26px rgba(0, 212, 255, 0.85);
+  box-shadow: 0 0 24px var(--accent-glow);
   transform: translateY(-2px);
 }
 
+/* This button with BLUE: ⚡ 13.02 - 13.52 Host */
 .btn.btn-host {
-  background: linear-gradient(135deg, #ff7a00 0%, #e65c00 100%);
+  background: linear-gradient(135deg, #0066ff 0%, #00c8ff 100%);
   color: #ffffff;
-  border: 1.5px solid #ffa033;
-  box-shadow: 0 0 18px rgba(255, 122, 0, 0.5);
+  border: 1.5px solid #00e5ff;
+  box-shadow: 0 0 20px rgba(0, 170, 255, 0.7);
   font-weight: 800;
 }
 
 .btn.btn-host:hover, .btn.btn-host:focus {
-  background: linear-gradient(135deg, #ffa033 0%, #ff7a00 100%);
+  background: linear-gradient(135deg, #0088ff 0%, #33e0ff 100%);
   color: #000000;
   border-color: #ffffff;
-  box-shadow: 0 0 26px rgba(255, 122, 0, 0.8);
+  box-shadow: 0 0 28px rgba(0, 220, 255, 0.95);
   transform: translateY(-2px);
 }
