@@ -1,28 +1,74 @@
 <!DOCTYPE html>
 <html manifest="700.manifest">
 <head>
-<title>YOVA FLASH - PS4 [5.05] 7.00 - 13.00 FW GoldHEN Host</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YOVA FLASH - PS4 7.00 - 8.52 FW Cache</title>
 <link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --bg-main: #0a0b0e;
+  --bg-header: #12141a;
+  --accent-color: #ff7a00;
+  --accent-glow: rgba(255, 122, 0, 0.45);
+  --text-white: #ffffff;
+  --text-muted: #d1d5db;
+  --status-warn: #ffb84d;
+}
+</style>
 </head>
 <body>
-<script>
-history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
-function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));window.msgs.innerHTML="Installing Offline Cache: " + Percent + "%";}
-function DisplayCacheProgress(){window.msgs.innerHTML="Cache Installed Successfully ✔";setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},1500);}
-window.applicationCache.addEventListener("progress",DLProgress,false);
-window.applicationCache.oncached=function(e){DisplayCacheProgress();};
-window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
-window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Installing Cache! - Clear and Re-Open Your Browser ...";};
-</script>
 <div id="brand">
   <img src="logo_raw.png" alt="Logo" width="34" height="34">
   <b>YOVA FLASH</b>
   <img src="flag.png" alt="Algeria Flag" width="34" height="34">
 </div>
-<h1 class="main-title">PS4 [5.05] 7.00 - 13.00 FW GoldHEN Host</h1>
+
+<h1 class="main-title">PS4 7.00 - 8.52 FW GoldHEN Host</h1>
 <div class="sub-title">YOVA FLASH Multi-Firmware Host</div>
-<div class="card-wrap">
-  <h1 id="msgs">Starting Cache Installation...</h1>
+
+<div style="text-align:center; margin: 30px auto;">
+  <h1 id="msgs" style="font-size: 18px; color: #ffb84d; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;">
+    Starting Cache Installation...
+  </h1>
 </div>
+
+<script>
+if (window.applicationCache) {
+    history.replaceState(null, null, 'index.html');
+    if (/PlayStation 4/i.test(navigator.userAgent)) {
+        var histlength = history.length;
+        if (histlength > 0) history.go(-histlength);
+    }
+    function DLProgress(e) {
+        var Percent = Math.round((e.loaded / e.total) * 100);
+        var m = document.getElementById("msgs");
+        if (m) m.innerHTML = "Installing Offline Cache: " + Percent + "%";
+    }
+    function DisplayCacheProgress() {
+        var m = document.getElementById("msgs");
+        if (m) {
+            m.innerHTML = "Cache Installed Successfully ✔";
+            setTimeout(function () {
+                m.innerHTML = "Now Close And Re-Open Your Browser ...";
+            }, 1500);
+        }
+    }
+    window.applicationCache.addEventListener("progress", DLProgress, false);
+    window.applicationCache.oncached = function (e) { DisplayCacheProgress(); };
+    window.applicationCache.onupdateready = function (e) { DisplayCacheProgress(); };
+    window.applicationCache.onerror = function (e) {
+        var m = document.getElementById("msgs");
+        if (m) m.innerHTML = "Error Installing Cache! - Clear and Re-Open Your Browser ...";
+    };
+} else {
+    document.addEventListener("DOMContentLoaded", function () {
+        var m = document.getElementById("msgs");
+        if (m) {
+            m.innerHTML = "Offline Cache is active for PS4 consoles.<br><span style='font-size:14px;color:#d1d5db;font-weight:400;'>Ready for PS4 &middot; Testing on Browser</span><br><br><a href='index.html' style='display:inline-block;background:#ff7a00;color:#000;font-size:15px;font-weight:700;padding:8px 20px;border-radius:4px;text-decoration:none;'>&larr; Return to Host Menu</a>";
+        }
+    });
+}
+</script>
 </body>
 </html>

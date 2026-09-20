@@ -223,64 +223,89 @@ function resetMsg() {
     }
 }
 
+function getCacheTarget(fw) {
+    if (fw == 505) return "cache505.html";
+    if (fw == 700) return "cache700.html";
+    if (fw == 900) return "cache900.html";
+    if (fw == 1000) return "cachecss.html";
+    return "cacheslopkit.html";
+}
+
 function launchPayload(fw) {
+    var cachePage = getCacheTarget(fw);
     var ac = window.applicationCache;
-    if (ac && ac.status == 0) {
-        if (fw == 505) window.location.replace("cache505.html");
-        else if (fw == 700) window.location.replace("cache700.html");
-        else if (fw == 900) window.location.replace("cache900.html");
-        else if (fw == 1000) window.location.replace("cachecss.html");
-        else if (fw >= 1150) window.location.replace("cacheslopkit.html");
+    var isCached = (ac && ac.status !== 0 && ac.status !== undefined);
+
+    // On desktop PC / testing environment: navigate to the cache installer page
+    if (!isPS4) {
+        setMsg("Opening Cache Installer for FW " + (fw == 1000 ? "10.00 - 11.02" : fw == 1150 ? "11.50 - 12.02" : fw == 1250 ? "12.50 - 13.00" : fw == 900 ? "9.00 - 9.60" : fw == 700 ? "7.00 - 8.52" : "5.05 / 5.07") + "...");
+        setTimeout(function () {
+            window.location.href = cachePage;
+        }, 200);
         return;
     }
 
+    // On PS4 uncached: install offline cache first
+    if (!isCached) {
+        setMsg("Redirecting to Cache Installation for FW " + fw + "... Please Wait");
+        setTimeout(function () {
+            window.location.replace(cachePage);
+        }, 200);
+        return;
+    }
+
+    // On PS4 cached: launch payload
     setMsg("Loading GoldHEN v2.4b18.10... Please Wait");
 
-    if (fw == 505) {
-        var script = document.createElement('script');
-        script.src = "505/exploit.js";
-        script.onerror = onScriptError;
-        document.head.appendChild(script);
-    } else if (fw == 700) {
-        var script = document.createElement('script');
-        script.type = 'module';
-        script.src = "700/alert.js";
-        script.onerror = onScriptError;
-        document.head.appendChild(script);
-    } else if (fw == 900) {
-        var script = document.createElement('script');
-        script.type = 'module';
-        script.src = "900/alert.js";
-        script.onerror = onScriptError;
-        document.head.appendChild(script);
-    } else if (fw == 1000) {
-        var script = document.createElement('script');
-        script.src = "css/main.js";
-        script.onerror = onScriptError;
-        script.onload = function () {
-            setTimeout(function () {
-                if (typeof doJb === 'function') doJb();
-            }, 500);
-        };
-        document.head.appendChild(script);
-    } else if (fw == 1150) {
-        var script = document.createElement('script');
-        script.type = 'module';
-        script.src = "slopkit/chain_lapse.js";
-        script.onerror = onScriptError;
-        document.head.appendChild(script);
-    } else if (fw == 1250) {
-        var script = document.createElement('script');
-        script.type = 'module';
-        script.src = "slopkit/chain_poops.js";
-        script.onerror = onScriptError;
-        document.head.appendChild(script);
+    try {
+        if (fw == 505) {
+            var script = document.createElement('script');
+            script.src = "505/exploit.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        } else if (fw == 700) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "700/alert.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        } else if (fw == 900) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "900/alert.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        } else if (fw == 1000) {
+            var script = document.createElement('script');
+            script.src = "css/main.js";
+            script.onerror = onScriptError;
+            script.onload = function () {
+                setTimeout(function () {
+                    if (typeof doJb === 'function') doJb();
+                }, 500);
+            };
+            document.head.appendChild(script);
+        } else if (fw == 1150) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "slopkit/chain_lapse.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        } else if (fw == 1250) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.src = "slopkit/chain_poops.js";
+            script.onerror = onScriptError;
+            document.head.appendChild(script);
+        }
+    } catch (err) {
+        setMsg("Error launching payload: " + (err && err.message ? err.message : err));
     }
 }
 
 function autoLaunch() {
     if (!isPS4) {
-        setMsg("Auto-detection is for PS4 consoles · Select firmware manually below");
+        setMsg("Auto-Detection requires PS4 console &middot; Select your firmware manually below");
         return;
     }
     if (fwNum == 5.05 || fwNum == 5.07) {
@@ -295,8 +320,13 @@ function autoLaunch() {
         launchPayload(1150);
     } else if (fwNum >= 12.50 && fwNum <= 13.00) {
         launchPayload(1250);
+    } else if (fwNum >= 13.02 && fwNum <= 13.52) {
+        setMsg("PS4 FW " + fwVersion + " Detected &middot; Redirecting to 13.02 - 13.52 Host...");
+        setTimeout(function () {
+            window.location.href = "../index.html";
+        }, 600);
     } else {
-        setMsg('Unsupported Firmware: <span style="color: red;">' + fwVersion + '</span> · Select an option below');
+        setMsg('Unsupported Firmware: <span style="color: #ff4d4d;">' + fwVersion + '</span> &middot; Select an option below');
     }
 }
 
