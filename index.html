@@ -5,25 +5,124 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>YOVA FLASH</title>
 <style>
-  html, body { margin:0; padding:0; background:#0b0d10; color:#c8ced8;
-               font:15px/1.45 "Segoe UI", system-ui, sans-serif; }
-  #wrap { padding:16px 18px; }
-  #state { font-size:22px; font-weight:700; margin:0 0 6px; }
-  #det { font-size:13px; color:#8b95a3; margin:0 0 4px; }
-  #det b { color:#c8ced8; font-weight:600; }
-  #cache { font-size:12px; color:#5c6672; margin:0 0 10px; min-height:14px; }
-  #cache.cacheok { color:#7fd0a0; }
-  .ok { color:#7fd0a0; } .bad { color:#d08a7f; } .warn { color:#d8c07f; }
-  #brand { text-align:center; padding:8px 10px; background:#0e1116;
-           border-bottom:1px solid #1e2732; }
-  #brand img { width:28px; height:28px; margin-right:8px; border-radius:50%;
-               vertical-align:middle; }
-  #brand b { font-size:15px; font-weight:700; letter-spacing:.14em;
-             color:#e6ebf2; vertical-align:middle; }
+  :root {
+    --bg-main: #0a0b0e;
+    --bg-header: #12141a;
+    --bg-card: rgba(18, 20, 26, 0.92);
+    --border-color: rgba(255, 122, 0, 0.35);
+    --accent-color: #ff7a00;
+    --accent-glow: rgba(255, 122, 0, 0.45);
+    --text-white: #ffffff;
+    --text-muted: #d1d5db;
+    --text-dim: #9ca3af;
+    --status-ok: #ff9426;
+    --status-warn: #ffb84d;
+    --status-bad: #ff4d4d;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: var(--bg-main);
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(255, 122, 0, 0.12) 0%, transparent 55%),
+      radial-gradient(circle at 10% 90%, rgba(255, 122, 0, 0.06) 0%, transparent 45%);
+    color: var(--text-white);
+    font: 15px/1.45 "Segoe UI", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #brand {
+    text-align: center;
+    padding: 12px 16px;
+    background: var(--bg-header);
+    border-bottom: 2px solid var(--accent-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  #brand img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-glow);
+    object-fit: cover;
+    vertical-align: middle;
+  }
+
+  #brand b {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: var(--text-white);
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+
+  #wrap {
+    max-width: 580px;
+    margin: 60px auto;
+    padding: 32px 36px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 122, 0, 0.12);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  #wrap:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 14px 40px rgba(255, 122, 0, 0.25);
+    transform: translateY(-2px);
+  }
+
+  #state {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0 0 10px;
+    color: var(--text-white);
+    letter-spacing: 0.02em;
+  }
+
+  #det {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+
+  #det b {
+    color: var(--text-white);
+    font-weight: 700;
+  }
+
+  #cache {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin: 0 0 4px;
+    min-height: 16px;
+  }
+
+  #cache.cacheok {
+    color: var(--status-ok);
+    font-weight: 700;
+  }
+
+  .ok { color: var(--status-ok); font-weight: 700; }
+  .bad { color: var(--status-bad); font-weight: 700; }
+  .warn { color: var(--status-warn); font-weight: 700; }
 </style>
 </head>
 <body>
-<div id="brand"><img src="logo_raw.png" alt="" width="28" height="28"><b>YOVA FLASH</b></div>
+<div id="brand"><img src="logo_raw.png" alt="" width="34" height="34"><b>YOVA FLASH</b></div>
 <div id="wrap">
   <div id="state">detecting firmware...</div>
   <div id="det"></div>
