@@ -49,9 +49,13 @@ function terse(s) {
 
 const SHOW_LOG = params.get("log") === "1";
 if (SHOW_LOG && document.body) document.body.className = "log";
-function finishUI(ok) {
+function finishUI(ok, reason) {
   if (SHOW_LOG || !document.body) return;
   document.body.className = ok ? "done" : "fail";
+  if (!ok && reason) {
+    const fd = document.getElementById("failDesc");
+    if (fd) fd.textContent = reason;
+  }
 }
 function mark(tag, detail) {
   const raw = detail;
@@ -148,6 +152,7 @@ let allDone = false,
     mark("FW", key || "(not a PS4 UA)");
     if (!off) {
       state("no offsets for this firmware", "bad");
+      finishUI(false, "No offsets available for this device (" + (key || "unknown device") + ").");
       return;
     }
     const fwKey = key || "unknown";
@@ -183,8 +188,10 @@ let allDone = false,
           " -- dump this firmware with kdump5.html and derive its table" +
           " with tools/kderive.py; stage=pre_primitive",
       )
-    )
+    ) {
+      finishUI(false, "Firmware " + fwKey + " kernel offsets are not ready.");
       return;
+    }
 
     const KPATCH_FILE =
       "patches/" + (off.kpatch || fwKey.replace(".", "") + ".bin");
@@ -202,8 +209,10 @@ let allDone = false,
           KPATCH_FILE +
           " -- build it from patches/<fw>.c, see patches/1300.c",
       )
-    )
+    ) {
+      finishUI(false, "Kernel patch missing for firmware " + fwKey + ".");
       return;
+    }
     const needPl = ["wk___imp_pthread_create", "k_pthread_create"].filter(
       (k) => off[k] === undefined,
     );
@@ -213,8 +222,10 @@ let allDone = false,
         !DO_PAYLOAD || needPl.length === 0,
         "missing=[" + needPl.join(",") + "] payload=" + PAYLOAD_FILE,
       )
-    )
+    ) {
+      finishUI(false, "Payload loader missing for firmware " + fwKey + ".");
       return;
+    }
     mark("FW-STATUS", off.fw_status || "none");
     mark(
       "FW-KTABLE",
@@ -3319,6 +3330,7 @@ let allDone = false,
   } catch (e) {
     mark("THREW", e && e.message ? e.message : String(e));
     state("threw", "bad");
+    finishUI(false, "Exploit error: " + (e && e.message ? e.message : String(e)));
   } finally {
     try {
       if (jbRestoreHook) jbRestoreHook("finally");
