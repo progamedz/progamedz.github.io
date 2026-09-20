@@ -52,15 +52,19 @@ if (SHOW_LOG && document.body) document.body.className = "log";
 function finishUI(ok) {
   if (SHOW_LOG || !document.body) return;
   document.body.className = ok ? "done" : "fail";
+  function goHome() {
+    location.replace("index.html");
+  }
   if (ok) {
-    function goHome() {
-      location.replace("index.html");
-    }
     window.addEventListener("click", function(e) {
       if (e.target && (e.target.id === "homeBtn" || e.target.closest("#homeBtn"))) return;
       goHome();
     });
     window.addEventListener("keydown", goHome);
+  } else {
+    window.addEventListener("click", goHome);
+    window.addEventListener("keydown", goHome);
+  }
     function pollDoneGamepad() {
       var gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
       for (var i = 0; i < gamepads.length; i++) {
