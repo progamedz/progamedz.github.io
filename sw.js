@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yova-flash-v10';
+const CACHE_NAME = 'yova-flash-v11';
 const ASSETS = [
   './',
   './index.html',
@@ -10,6 +10,8 @@ const ASSETS = [
   './flag.png',
   './jb.js',
   './core.js',
+  './core.js?v=10',
+  './jb.js?v=10',
   './mem.js',
   './int64.js',
   './ps4_offsets.js',
