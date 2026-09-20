@@ -35,29 +35,77 @@ html, body {
 
 #brand {
   text-align: center;
-  padding: 12px 16px;
+  padding: 10px 16px;
   background: var(--bg-header);
   border-bottom: 2px solid var(--accent-color);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 0 16px var(--accent-glow);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 16px;
+  flex-wrap: wrap;
   margin-bottom: 24px;
 }
 
-#brand img {
-  width: 36px;
-  height: 36px;
+.brand-side {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.brand-logo {
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: 2px solid var(--accent-color);
-  box-shadow: 0 0 12px var(--accent-glow);
+  box-shadow: 0 0 14px var(--accent-glow);
   object-fit: cover;
+  vertical-align: middle;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 22px rgba(0, 220, 255, 0.9);
+}
+
+.btn-tiktok {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 180, 255, 0.12);
+  color: #00e5ff;
+  border: 1px solid rgba(0, 200, 255, 0.5);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.btn-tiktok:hover {
+  background: #00c8ff;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 0 18px rgba(0, 220, 255, 0.85);
+  transform: translateY(-1px);
+}
+
+.btn-tiktok svg {
   vertical-align: middle;
 }
 
 #brand b {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
   letter-spacing: 0.15em;
   color: var(--text-white);
