@@ -95,6 +95,32 @@
   .cacheok { color: var(--status-ok) !important; font-weight: 600; }
   .warn { color: var(--status-warn) !important; font-weight: 600; }
   .bad { color: var(--status-bad) !important; font-weight: 600; }
+
+  .btn-multi {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(255, 122, 0, 0.1);
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 122, 0, 0.5);
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    margin-top: 25px;
+  }
+
+  .btn-multi:hover, .btn-multi:focus {
+    background: var(--accent-color);
+    color: #000000;
+    border-color: #ff9426;
+    box-shadow: 0 0 20px var(--accent-glow);
+    transform: translateY(-2px);
+  }
 </style>
 </head>
 <body>
@@ -108,6 +134,10 @@
   <div id="state">detecting firmware...</div>
   <div id="det"></div>
   <div id="cache"></div>
+
+  <div style="margin-top: 30px;">
+    <a href="g2all/index.html" class="btn-multi">👑 5.05 - 13.00 Multi-Firmware Host</a>
+  </div>
 </div>
 
 <script>
