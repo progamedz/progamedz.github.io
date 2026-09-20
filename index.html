@@ -113,18 +113,15 @@
             launchGoldHen();
             return;
         }
-        var preferGold = (fwnum === 1352 || params.get("gold") === "1");
-        var targetName = preferGold ? "GoldHEN" : "PS4-HEN";
         var count = seconds;
-        setState("Auto-launching " + targetName + " in " + count + "s...", "ok");
+        setState("Auto-launching GoldHEN in " + count + "s...", "ok");
         timer = setInterval(function () {
             count--;
             if (count <= 0) {
                 cancelTimer();
-                if (preferGold) launchGoldHen();
-                else launchHen();
+                launchGoldHen();
             } else {
-                setState("Auto-launching " + targetName + " in " + count + "s...", "ok");
+                setState("Auto-launching GoldHEN in " + count + "s...", "ok");
             }
         }, 1000);
     }
