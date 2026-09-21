@@ -3094,6 +3094,7 @@ let allDone = false,
                   );
                   plDone = rc === 0 && handle.hi >>> 0 > 0;
                   payloadRunning = plDone;
+                  if (plDone) { setTimeout(function(){var d=document.createElement('div');d.style.cssText='position:fixed;top:20px;left:20px;z-index:9999;background:rgba(0,20,40,0.92);color:#00e5ff;font-family:monospace;font-size:15px;font-weight:bold;padding:12px 20px;border:2px solid #00e5ff;border-radius:8px;box-shadow:0 0 18px #00e5ff88;pointer-events:none;';d.textContent='\uD83C\uDFAE Jailbreak by PRO-GAME';document.body.appendChild(d);setTimeout(function(){d.remove();},5000);},4000); }
                   mark(
                     "PAYLOAD-RUN",
                     "pthread_create=" + rc + " handle=" + handle,
