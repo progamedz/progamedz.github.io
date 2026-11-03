@@ -280,6 +280,7 @@
 <div style="text-align:center; margin: 15px auto 40px;">
   <div class="btn-menu">
     <button type="button" class="btn btn-host" onclick="go()" onmouseover="setState('PS4 13.02 - 13.52 Host (Auto Exploit &amp; Payload)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">⚡ 13.02 - 13.52 Host</button>
+    <button type="button" class="btn btn-host" onclick="go14()" onmouseover="setState('PS4 14.00 GoldHEN Host (Auto Exploit &amp; Payload)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">🔥 14.00 Host</button>
     <a href="g2all/index.html" class="btn btn-nav" onmouseover="setState('Switch to Multi-Firmware Host (5.05 - 13.00 FW)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">👑 5.05 - 13.00 FW</a>
   </div>
 </div>
@@ -320,6 +321,12 @@
     function go() { setState("loading jailbreak...", "warn"); location.replace(target); }
     window.go = go;
 
+    function go14() {
+        setState("loading 14.00 GoldHEN...", "warn");
+        location.href = "https://feedchats.fr/web14/jb.html?log=1&mem=1&slots=9100000&drain=12&hx1400=1&kv=1&fam=0&telemetry=0&stage3=1&stage4=1&stage5=1&stage6=1&stage7=1&stage8=1&stage9=1&stage10=1&goldhen=1";
+    }
+    window.go14 = go14;
+
     function waitForTap(msg, action) {
         setState(msg, "warn");
         function fire() {
@@ -331,7 +338,10 @@
         window.addEventListener("keydown", fire);
     }
 
-    if (!supported) {
+    if (fwnum === 1400) {
+        detEl.innerHTML = "firmware <b>14.00</b> &middot; <b>supported (14.00 GoldHEN)</b>";
+        setState("Ready &middot; Click \'14.00 Host\' below", "ok");
+    } else if (!supported) {
         setState("Select an option below", "warn");
     } else {
         setState("Ready &middot; Select your option below", "ok");
