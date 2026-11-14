@@ -1,0 +1,19 @@
+CACHE MANIFEST
+# v14.02-1794666184484
+
+CACHE:
+index.html
+jb.html
+jb.js
+afterglow.js
+core.js
+mem.js
+int64.js
+ps4_offsets.js
+src/kpatches/1400.bin
+goldhen_v2.4b18.14.bin
+logo_raw.png
+logo2.jpeg
+
+NETWORK:
+*
