@@ -281,6 +281,7 @@
   <div class="btn-menu">
     <button type="button" class="btn btn-host" onclick="go()" onmouseover="setState('PS4 13.02 - 13.52 Host (Auto Exploit &amp; Payload)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">⚡ 13.02 - 13.52 Host</button>
     <button type="button" class="btn btn-host" onclick="go14()" onmouseover="setState('PS4 14.00 GoldHEN Host (Auto Exploit &amp; Payload)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">🔥 14.00 Host</button>
+    <button type="button" class="btn btn-host" onclick="go1402()" onmouseover="setState('PS4 14.02 GoldHEN Host (WebKitty Afterglow)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">🔥 14.02 Host</button>
     <a href="g2all/index.html" class="btn btn-nav" onmouseover="setState('Switch to Multi-Firmware Host (5.05 - 13.00 FW)', 'warn')" onmouseout="setState('Ready &middot; Select your option below', 'ok')">👑 5.05 - 13.00 FW</a>
   </div>
 </div>
@@ -326,6 +327,12 @@
         location.href = "web14/index.html";
     }
     window.go14 = go14;
+
+    function go1402() {
+        setState("loading 14.02 GoldHEN...", "warn");
+        location.href = "web1402/index.html";
+    }
+    window.go1402 = go1402;
 
     function waitForTap(msg, action) {
         setState(msg, "warn");
